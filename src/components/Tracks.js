@@ -25,11 +25,13 @@ class Tracks extends Component{
         if(!track.preview_url){
             return <span>N/A</span>;
         }
-        if(this.state.playing && this.state.playingPreviewUrl === track.previewUrl){
+        if(this.state.playing
+             && this.state.playingPreviewUrl === track.preview_url){
             return <span>| |</span>;
         }
         return <span>&#9654;</span>
     }
+
     render(){
         const {tracks} = this.props;
 
@@ -39,17 +41,15 @@ class Tracks extends Component{
                 tracks.map(track=>{
                     const {id,name,album,preview_url} = track;
                     return(
-                        <div 
+                        <div
                             key = {id} 
                             onClick ={this.playAudio(preview_url)} 
                             className = 'track' >
                             <img src = {album.images[0].url} 
                             alt = "track-artist" 
                             className = 'track-image'/>
-                            {/*<p className = 'track-text'>{name}</p>*/}
-                            <div className = "track-icon">
-                            <p>{this.trackIcon(track)}></p>
-                            </div>
+                            <p className = 'track-text'>{name}</p>
+                            <p className = "track-icon"> {this.trackIcon(track)}></p>
                         </div>
                     )
                 })
